@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE LAST OF CROWN - Official Site</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: #ffffff;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 2px solid #e74c3c;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #e74c3c;
+            text-shadow: 0 0 10px rgba(231, 76, 60, 0.5);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover {
+            color: #e74c3c;
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 80px;
+            padding: 2rem 0;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><rect fill="%23000" width="1200" height="400"/><polygon fill="%23e74c3c" points="0,400 400,200 800,350 1200,100 1200,400"/><polygon fill="%23c0392b" points="0,400 300,250 600,380 900,150 1200,250 1200,400"/></svg>');
+            background-size: cover;
+            background-position: center;
+            border-radius: 15px;
+            margin: 2rem 0;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            color: #e74c3c;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        /* Genre Tags */
+        .genres {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .genre-tag {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+        }
+
+        /* Info Cards */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(231, 76, 60, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(231, 76, 60, 0.2);
+        }
+
+        .info-card h3 {
+            color: #e74c3c;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        /* Character Cards */
+        .character-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .character-card {
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            padding: 1.5rem;
+            border: 2px solid #e74c3c;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .character-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(231, 76, 60, 0.5);
+        }
+
+        .character-name {
+            color: #e74c3c;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Tables */
+        .school-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .school-table th, .school-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(231, 76, 60, 0.3);
+        }
+
+        .school-table th {
+            background: #e74c3c;
+            color: white;
+            font-weight: bold;
+        }
+
+        .school-table tr:hover {
+            background: rgba(231, 76, 60, 0.1);
+        }
+
+        /* Rank System */
+        .rank-section {
+            margin: 3rem 0;
+        }
+
+        .rank-list {
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 1rem 0;
+            border-left: 4px solid #e74c3c;
+        }
+
+        .rank-title {
+            color: #e74c3c;
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .rank-item {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .rank-item:last-child {
+            border-bottom: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Age Rating */
+        .age-rating {
+            background: #e74c3c;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 5px;
+            font-weight: bold;
+            display: inline-block;
+            margin: 1rem 0;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: #e74c3c;
+            text-align: center;
+            margin: 3rem 0 2rem 0;
+            text-shadow: 0 0 10px rgba(231, 76, 60, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">TLOC</div>
+            <ul class="nav-links">
+                <li><a onclick="showPage('home')">Αρχική</a></li>
+                <li><a onclick="showPage('locations')">Τοποθεσίες</a></li>
+                <li><a onclick="showPage('schools')">Σχολεία</a></li>
+                <li><a onclick="showPage('characters')">Χαρακτήρες</a></li>
+                <li><a onclick="showPage('devils')">Devils Ranking</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <!-- HOME PAGE -->
+        <div id="home" class="page active">
+            <section class="hero">
+                <h1>THE LAST OF CROWN</h1>
+                <p>TLOC</p>
+                <div class="age-rating">+17</div>
+            </section>
+
+            <div class="genres">
+                <span class="genre-tag">ΒΙΑ</span>
+                <span class="genre-tag">ΔΡΑΣΗ</span>
+                <span class="genre-tag">ΜΥΣΤΗΡΙΟ</span>
+                <span class="genre-tag">ΚΩΜΩΔΙΑ</span>
+                <span class="genre-tag">ΠΕΡΙΠΕΤΕΙΑ</span>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>Σχετικά με το Manga</h3>
+                    <p><strong>Δημιουργός:</strong> DIA TASAKU</p>
+                    <p><strong>Ημερομηνία Κυκλοφορίας:</strong> Δεκέμβριος 2024</p>
+                    <p><strong>Κατάσταση:</strong> Vol 1 με 23 chapters (Complete)</p>
+                    <p><strong>Ανάπτυξη:</strong> Η ιστορία σχεδιάστηκε από το 2019 αλλά σταματήσε λόγω αρρώστιας με COVID και άλλων προβλημάτων στη ζωή του δημιουργού.</p>
+                </div>
+
+                <div class="info-card">
+                    <h3>Κόσμος της Ιστορίας</h3>
+                    <p>Το THE LAST OF CROWN είναι ένας κόσμος γεμάτος διαβόλους, ψυχές, ενέργειες, κατάρες και πολιτικές συνωμοσίες.</p>
+                    <p>Είναι η συνέχεια της ιστορίας των "Devils of Crown" και "School of Crown Universe".</p>
+                    <p>Σύμφωνα με ανακοινώσεις του DIA FATNAMMI, το TLOC είναι το τέλος αυτού του σύμπαντος.</p>
+                </div>
+
+                <div class="info-card">
+                    <h3>Τρέχον Arc</h3>
+                    <p><strong>ARC ERA GOLD HOJA</strong></p>
+                    <p><strong>Season 1</strong></p>
+                    <p><strong>Episodes:</strong> 9</p>
+                    <p><strong>Manga:</strong> Κεφάλαια 1-23 (Complete)</p>
+                </div>
+            </div>
+
+            <h2 class="section-title">Κύριοι Χαρακτήρες</h2>
+            <div class="character-grid">
+                <div class="character-card">
+                    <div class="character-name">AKOS TASAKU</div>
+                    <p>Ο κύριος χαρακτήρας (MC). Ένας χαρακτήρας που κανένας δεν μπορεί να μαντέψει τι θα κάνει. Δυνατός αλλά κρύβει τον πόνο του. Διαθέτει την ικανότητα "CREATOR OF PLAN" που του επιτρέπει να σχεδιάζει σενάρια στο μυαλό του σε κλάσματα δευτερολέπτου.</p>
+                </div>
+
+                <div class="character-card">
+                    <div class="character-name">TOMA TAKAHASHI</div>
+                    <p>Μαθητής του AKOS TASAKU στο Private High School for Education HOJA Grade Bronze. Διαθέτει σπάνιο αίμα HWIPS (1 στα 100 εκατομμύρια). Δίνει τα πάντα για να μην καταστρέψει την εμπιστοσύνη του AKOS TASAKU.</p>
+                </div>
+
+                <div class="character-card">
+                    <div class="character-name">Kuroza Shizai</div>
+                    <p>Ένας από τους κύριους χαρακτήρες της ιστορίας.</p>
+                </div>
+
+                <div class="character-card">
+                    <div class="character-name">SOKA TUYAMA</div>
+                    <p>Βασικός χαρακτήρας στην ιστορία του THE LAST OF CROWN.</p>
+                </div>
+
+                <div class="character-card">
+                    <div class="character-name">INORI HUGARAGO</div>
+                    <p>Μέλος της κύριας ομάδας χαρακτήρων.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- LOCATIONS PAGE -->
+        <div id="locations" class="page">
+            <h1 class="section-title">Τοποθεσίες - Japan City</h1>
+            
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>Βουνά & Φυσικές Περιοχές</h3>
+                    <ul>
+                        <li>MOUNTAIN</li>
+                        <li>SINISH MOUNTAIN</li>
+                        <li>FOREST TASAKU-SINISH</li>
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <h3>Χωριά</h3>
+                    <ul>
+                        <li>Village SINISH</li>
+                        <li>VILLAGE SINISH</li>
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <h3>Πόλεις</h3>
+                    <ul>
+                        <li>TOKYO</li>
+                        <li>KOJANA</li>
+                        <li>NAZAKOSAFA</li>
+                        <li>OSOKA</li>
+                        <li>SAKURISHI</li>
+                        <li>Nagoya</li>
+                        <li>Shibuya</li>
+                        <li>TAKAYAMA</li>
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <h3>Στρατιωτικές Εγκαταστάσεις</h3>
+                    <ul>
+                        <li>HQ Himeji</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- SCHOOLS PAGE -->
+        <div id="schools" class="page">
+            <h1 class="section-title">Private High School for Education HOJA</h1>
+            
+            <div class="info-card">
+                <h3>Σχολεία και Ηγέτες</h3>
+                <ul>
+                    <li><strong>SCHOOL SINISH VILLAGE</strong> - Leader: ZOYA</li>
+                    <li><strong>SCHOOL TOKYO</strong> - Leader: ZUKISA</li>
+                    <li><strong>SCHOOL NAZAKOSAFA</strong> - Leader: AKURA</li>
+                    <li><strong>SCHOOL KOJANA</strong> - Leader: Cajo</li>
+                    <li><strong>SCHOOL ALPHA SINISH</strong> - Leader: Zen Kurosu</li>
+                    <li><strong>SCHOOL YOKOHAMA</strong> - Leader: Kuramoto</li>
+                </ul>
+            </div>
+
+            <h2 class="section-title">Πίνακες Βαθμολογίας Σχολείων</h2>
+
+            <h3 style="color: #e74c3c; margin: 2rem 0 1rem 0;">School Alpha Sinish - Leader: Zen Kurosu</h3>
+            <table class="school-table">
+                <thead>
+                    <tr>
+                        <th>Grade</th>
+                        <th>Students / Wizards</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Conquerors</td>
+                        <td>Akos Tasaku, Oliver, YU, Lulu, Zen Kurosu</td>
+                    </tr>
+                    <tr>
+                        <td>WIZARD</td>
+                        <td>Akos Tasaku</td>
+                    </tr>
+                    <tr>
+                        <td>Master</td>
+                        <td>Tokugawa</td>
+                    </tr>
+                    <tr>
+                        <td>Platinum</td>
+                        <td>Skoa Toronof, Tumata</td>
+                    </tr>
+                    <tr>
+                        <td>Silver</td>
+                        <td>Soka-Tuyama, Inori Hugarago, Takara Togo, Toma Takahashi</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 style="color: #e74c3c; margin: 2rem 0 1rem 0;">School Yokohama - Leader: Kuramoto</h3>
+            <table class="school-table">
+                <thead>
+                    <tr>
+                        <th>Grade</th>
+                        <th>Students / Wizards</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Conquerors</td>
+                        <td>Jin, Takeshi Sun, Kuramoto</td>
+                    </tr>
+                    <tr>
+                        <td>WIZARD</td>
+                        <td>Kuramoto</td>
+                    </tr>
+                    <tr>
+                        <td>Master</td>
+                        <td>Takumi, Mario, Oliver, Ronika, Enjia</td>
+                    </tr>
+                    <tr>
+                        <td>Platinum</td>
+                        <td>Tioja</td>
+                    </tr>
+                    <tr>
+                        <td>Silver</td>
+                        <td>Xenio Tuyama, Rokkono, Melane, Tomo Shino</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- CHARACTERS PAGE -->
+        <div id="characters" class="page">
+            <h1 class="section-title">Όλοι οι Χαρακτήρες</h1>
+
+            <h2 style="color: #e74c3c; margin: 2rem 0 1rem 0;">Middle School</h2>
+            <div class="character-grid">
+                <div class="character-card">
+                    <div class="character-name">TOMA</div>
+                </div>
+                <div class="character-card">
+                    <div class="character-name">ALEXA</div>
+                    <p>Teacher</p>
+                </div>
+            </div>
+
+            <h2 style="color: #e74c3c; margin: 2rem 0 1rem 0;">Πολίτες</h2>
+            <div class="character-grid">
+                <div class="character-card">
+                    <div class="character-name">MOM-TOMA</div>
+                </div>
+                <div class="character-card">
+                    <div class="character-name">DAD-TOMA</div>
+                </div>
+                <div class="character-card">
+                    <div class="character-name">ITOU</div>
+                    <p>Police Officer</p>
+                </div>
+            </div>
+
+            <h2 style="color: #e74c3c; margin: 2rem 0 1rem 0;">Devils Hunter Ranks</h2>
+            <div class="rank-section">
+                <div class="rank-list">
+                    <div class="rank-title">Rank 1</div>
+                    <div class="rank-item">Natsuki-H, Goro, Fumiko, Eraneso Vazuan, Mario, Mateo</div>
+                </div>
+                <div class="rank-list">
+                    <div class="rank-title">Rank 2</div>
+                    <div class="rank-item">Lev, Enmei, Akimitsu</div>
+                </div>
+                <div class="rank-list">
+                    <div class="rank-title">Rank 3</div>
+                    <div class="rank-item">Rin, Rei</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DEVILS PAGE -->
+        <div id="devils" class="page">
+            <h1 class="section-title">Devils Ranking System</h1>
+
+            <div class="rank-section">
+                <div class="rank-list">
+                    <div class="rank-title">RANK CONQUERORS</div>
+                    <div class="rank-item">DEVILS SEA DH</div>
+                    <div class="rank-item">DEVILS END/SAKOURA DH</div>
+                    <div class="rank-item">MINORI DH</div>
+                    <div class="rank-item">DEVILS Tenshi OR Angel DH</div>
+                    <div class="rank-item">DEVILS Savage D</div>
+                    <div class="rank-item">DEVILS WARRIOS-ETAFJIO D</div>
+                    <div class="rank-item">DEVILS WARRIOS-Sanojoro DH</div>
+                    <div class="rank-item">DEVILS KING DH</div>
+                    <div class="rank-item">AMAYA NAKUMRA DH</div>
+                </div>
+
+                <div class="rank-list">
+                    <div class="rank-title">RANK 1</div>
+                    <div class="rank-item">DEVILS CHAOS DH - MAKITA</div>
+                    <div class="rank-item">DEVILS DEATH DH - ROE</div>
+                    <div class="rank-item">DEVILS EXISTENCE H - HIKARU SHINO</div>
+                    <div class="rank-item">DEVILS SOUND D</div>
+                    <div class="rank-item">DEVILS CURSE D</div>
+                    <div class="rank-item">DEVILS GHOST+DEVILS AXE HD - Natsuki</div>
+                    <div class="rank-item">DEVILS AXE+DEVILS GHOST HD - Natsuki</div>
+                    <div class="rank-item">DEVIL'S PAST D</div>
+                </div>
+
+                <div class="rank-list">
+                    <div class="rank-title">RANK 2</div>
+                    <div class="rank-item">DEVILS Rokuro H - ROKURO</div>
+                    <div class="rank-item">DEVILS BEAUTY DH - Emica</div>
+                    <div class="rank-item">DEVILS Scorpio H - jane AYAMA</div>
+                </div>
+
+                <div class="rank-list">
+                    <div class="rank-title">RANK 3</div>
+                    <div class="rank-item">DEVILS MONSTER D</div>
+                    <div class="rank-item">DEVILS HELP H - AKOS TASAKU</div>
+                    <div class="rank-item">DEVILS ALIVE DH</div>
+                    <div class="rank-item">DEVILS ZOMBIE HEAD HUMAN OR ANIMAL D</div>
+                </div>
+
+                <div class="rank-list">
+                    <div class="rank-title">RANK 4</div>
+                    <div class="rank-item">DEVILS ANIMAL H - Fuyuto jasoka</div>
+                    <div class="rank-item">DEVILS FUTURE H - Banri Touki</div>
+                </div>
+
+                <div class="rank-list">
+                    <div class="rank-title">RANK 5</div>
+                    <div class="rank-item">DEVILS FLOWER D</div>
+                </div>
+            </div>
+
+            <h2 style="color: #e74c3c; margin: 3rem 0 2rem 0;">GASHURO Rankings</h2>
+
+            <div class="rank-section">
+                <div class="rank-list">
+                    <div class="rank-title">RANK CONQUERORS</div>
+                    <div class="rank-item">GASHURO SEA BEAST</div>
+                    <div class="rank-item">KAJO</div>
+                </div>
+
+                <div class="rank-list">
+                    <div class="rank-title">RANK 1</div>
+                    <div class="rank-item">tanaka</div>
+                    <div class="rank-item">GASHURO THREE SOULS</div>
+                </div>
+
+                <div class="rank-list">
+                    <div class="rank-title">RANK 2</div>
+                    <div class="rank-item">MAYOZA MOUSE</div>
+                </div>
+
+                <div class="rank-list">
+                    <div class="rank-title">RANK 4</div>
+                    <div class="rank-item">GASHURO WOLF</div>
+                </div>
+
+                <div class="rank-list">
+                    <div class="rank-title">RANK 5</div>
+                    <div class="rank-item">GASHURO SPIDER</div>
+                    <div class="rank-item">GASHURO HUMAN</div>
+                </div>
+            </div>
+
+            <div class="info-card" style="margin-top: 2rem;">
+                <h3>Σημειώσεις για τους Devils</h3>
+                <p><strong>H:</strong> Devils που έχουν ανθρώπινο σώμα</p>
+                <p><strong>DH:</strong> Devils με σώμα διαβόλου σε ανθρώπινη μορφή</p>
+                <p><strong>D:</strong> Καθαροί Devils</p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Add some interactive effects
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add hover effects to cards
+            const cards = document.querySelectorAll('.info-card, .character-card');
+            
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+
+            // Add smooth scrolling
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        });
+
+        // Easter egg - konami code
+        let konamiCode = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
+        let konamiIndex = 0;
+
+        document.addEventListener('keydown', function(e) {
+            if (e.keyCode === konamiCode[konamiIndex]) {
+                konamiIndex++;
+                if (konamiIndex === konamiCode.length) {
+                    document.body.style.background = 'linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #f7b731, #5f27cd)';
+                    document.body.style.animation = 'rainbow 2s infinite';
+                    setTimeout(() => {
+                        location.reload();
+                    }, 3000);
+                    konamiIndex = 0;
+                }
+            } else {
+                konamiIndex = 0;
+            }
+        });
+
+        // Add CSS animation for rainbow effect
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes rainbow {
+                0% { filter: hue-rotate(0deg); }
+                100% { filter: hue-rotate(360deg); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
+                
